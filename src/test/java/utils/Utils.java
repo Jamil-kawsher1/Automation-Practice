@@ -5,9 +5,13 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.Duration;
 
 public class Utils {
     public static void doScroll(WebDriver driver){
@@ -20,5 +24,9 @@ public class Utils {
         JSONObject jsonObject = (JSONObject) obj;
         return jsonObject;
 
+    }
+    public static void  waitforElement(WebDriver driver, WebElement webelemet,int time_unit_sec){
+        WebDriverWait wait =new WebDriverWait(driver, Duration.ofSeconds(time_unit_sec));
+        wait.until(ExpectedConditions.visibilityOf(webelemet));
     }
 }

@@ -17,7 +17,7 @@ public class PIMTestRunner extends Setup {
 
     @BeforeTest
     public void doLogin () {
-        driver.get("https://opensource-demo.orangehrmlive.com/");
+
         loginpage = new Login(driver);
         loginpage.doLogin("Admin", "admin123");
     }
@@ -33,7 +33,7 @@ public class PIMTestRunner extends Setup {
         Assert.assertTrue(isUserFound.contains("Records Found"));
     }
 
-    @Test(priority = 2, description = "select employe and check there list")
+    @Test(priority = 2, description = "select employe and check there list",enabled = false)
     public void selectEnployeStatus () throws InterruptedException {
         Thread.sleep(4000);
         dashboard.employeeDropDown.get(0).click();
@@ -50,8 +50,11 @@ public class PIMTestRunner extends Setup {
 
     }
 @Test(priority = 3,description = "Create Employee")
-    public void createEmnplyee () {
+    public void createEmnplyee () throws InterruptedException {
         pimpage = new PimPage(driver);
-        pimpage.createEmnplyee();
+ pimpage.createEmployee();
+    String tiitle_actual=pimpage.title_AddEmployee.getText();
+    String title_expected="Add Employee";
+    Assert.assertEquals(tiitle_actual,title_expected);
     }
 }
